@@ -4,10 +4,14 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node src/server.ts",
+    "start": "nodemon build/server.js",
+    "build": "npx tsc",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "test": "jasmine-ts",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "lint": "eslint  src/**/*.ts",
+    "prettier": "prettier --config .prettierrc src/**/*.ts --write"
+
   },
   "author": "Udacity",
   "license": "ISC",
@@ -21,9 +25,15 @@
     "@types/express": "^4.17.9",
     "@types/jasmine": "^3.6.3",
     "@types/pg": "^7.14.7",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "jasmine": "^3.6.4",
     "jasmine-spec-reporter": "^6.0.0",
     "jasmine-ts": "^0.3.0",
+    "prettier": "^2.5.1",
     "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9"
   }
