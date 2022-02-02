@@ -12,6 +12,8 @@ const {
     POSTGRES_USER,
     POSTGRES_PASSWORD
 } = process.env
+console.log(POSTGRES_TEST_DB);
+
 let client : Pool;
 
 if (process.env.ENV == 'dev') {

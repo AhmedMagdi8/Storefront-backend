@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 
 import userRoutes from './routes/user';
 import productsRoutes from './routes/product';
+import ordersRoutes from './routes/order';
 
 
 const app: express.Application = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/users',userRoutes);
 app.use('/products', productsRoutes);
+app.use('/orders', ordersRoutes);
 
 app.get('/', function (req: Request, res: Response) {
   res.send('Hello World!');

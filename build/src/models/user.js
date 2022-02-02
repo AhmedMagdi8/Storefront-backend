@@ -13,11 +13,8 @@ class User {
         const conn = await database_1.default.connect();
         const sql = 'SELECT * FROM USERS';
         const result = await conn.query(sql);
-        if (result.rows.length) {
-            const users = result.rows;
-            return users;
-        }
-        return null;
+        const users = result.rows;
+        return users;
     }
     async show(id) {
         const conn = await database_1.default.connect();
@@ -32,13 +29,16 @@ class User {
     async createUser(username, password, firstname, lastname) {
         const password_digest = bcrypt_1.default.hashSync(password + pepper, Number(saltRounds));
         const conn = await database_1.default.connect();
-        const sql = 'INSERT INTO USERS(username,password,firstname,lastname) VALUES($1,$2,$3,$4)';
+        const sql = 'INSERT INTO USERS(username,password,firstname,lastname) VALUES($1,$2,$3,$4) RETURNING *';
         const result = await conn.query(sql, [username, password_digest, firstname, lastname]);
-        if (result.rows.length) {
-            const user = result.rows[0];
-            return user;
-        }
-        return null;
+        return result.rows[0];
+    }
+    async deleteUsers() {
+        const conn = await database_1.default.connect();
+        const sql = 'DELETE FROM users';
+        await conn.query(sql);
+        conn.release();
+        return "deleted successfully";
     }
 }
 exports.User = User;

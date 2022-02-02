@@ -48,4 +48,16 @@ export class Product {
         }
 
     }
+
+    async deleteProducts() {
+        const conn = await Client.connect();
+        const sql = 'DELETE FROM products';
+
+
+        await conn.query(sql);
+        
+        return "DELETED SUCCESSFULLY"
+
+
+    }
 }

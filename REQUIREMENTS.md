@@ -5,27 +5,30 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
+- Index '/products' [GET]
+- Show   '/products/:id' [GET]
+- Create [token required] '/products' [POST]
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users  
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index [token required] '/users' [GET]
+- Show [token required] '/users/:id' [GET]
+- Create N[token required] '/users/' [POST]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required] 'orders/:userI[GET]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
-
+- All orders [token required] '/orders/' [GET]
+- create order [token required] '/orders/:userId' [POST]
+- add products to order [token required] '/orders/:orderId/:productId' [POST]
+- show products of a specific order [token required] '/orders/order/:orderId'[GET]
 ## Data Shapes
 #### Product
 -  id
 - name
 - price
-- [OPTIONAL] category
+- category
 
 #### User
 - id
@@ -40,3 +43,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+## DATA TABLES
+TABLE users(id integer,username varchar(100),firstname VARCHAR(100),lastname VARCHAR(100),password VARCHAR);
+TABLE products (id integer,name varchar(100),price integer,category varchar(100));
+TABLE orders (id integer,status VARCHAR(64),user_id INTEGER [foreign key to users(id)]);
+TABLE order_products(id integer,quantity integer,order_id integer [foreign key to orders(id)],product_id integer [foreign key to products(id));

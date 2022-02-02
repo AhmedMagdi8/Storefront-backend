@@ -1,19 +1,24 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const user_1 = require("../user");
-const user_ = new user_1.User();
-describe("User model", () => {
-    it('should have an index function', () => {
-        expect(user_.index).toBeDefined();
-    });
-    it('should have an show user function', () => {
-        expect(user_.show).toBeDefined();
-    });
-    it('should have a createUser function', () => {
-        expect(user_.createUser).toBeDefined();
-    });
-    // it('should get all users', async () => {
-    //     await user_.createUser('ahmed','ahmed','ahmed','ahmed');
-    //     expect(user_.index()).toEqual([]);
-    // })
-});
+// import { User } from '../user';
+// const user_ = new User();
+// describe("User model", () => {
+//     it('should have an index function', () => {
+//         expect(user_.index).toBeDefined();
+//     });
+//     it('should have an show user function', () => {
+//         expect(user_.show).toBeDefined();
+//     });
+//     it('should have a createUser function', () => {
+//         expect(user_.createUser).toBeDefined();
+//     });
+//     it('should get all users', async () => {
+//         expect(await user_.index()).toEqual([]);
+//     });
+//     it('should create a user', async () => {
+//         expect(await user_.createUser("test", "hello", "test","test")).toEqual("success");
+//         await user_.deleteUsers();
+//     });
+//     it('should show a specific user', async () => {
+//         expect(await user_.show(1)).toEqual(null);
+//     }); 
+// });

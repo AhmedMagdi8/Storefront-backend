@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import jwt from 'jsonwebtoken';
 
 import {User} from '../models/user';
 
@@ -9,9 +10,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
         const users = await user.index();
         res.json(users);
     } catch (err) {
-        res.status(500).json({
-            "err": "server error"
-        })
+        res.status(500).json("server error");
     }
 
 };
@@ -29,15 +28,15 @@ export const getUser = async (req: Request, res: Response) => {
 }
 
 export const createUser = async (req: Request, res: Response) => {
-    console.log(req.body)
     const username = req.body.username;
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const password = req.body.password;
 
     try {
-        await user.createUser(username,password,firstname,lastname);
-        res.json("success");
+        const  user_ = await user.createUser(username,password,firstname,lastname);
+        const token = jwt.sign({ user: user_ }, String(process.env.TOKEN_SECRET));
+        res.json(token);
     } catch (err) {
         console.log(err);
         

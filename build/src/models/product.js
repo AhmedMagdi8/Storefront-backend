@@ -37,5 +37,11 @@ class Product {
             throw new Error("Adding product failed");
         }
     }
+    async deleteProducts() {
+        const conn = await database_1.default.connect();
+        const sql = 'DELETE FROM products';
+        await conn.query(sql);
+        return "DELETED SUCCESSFULLY";
+    }
 }
 exports.Product = Product;

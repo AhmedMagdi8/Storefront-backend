@@ -8,11 +8,13 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const user_1 = __importDefault(require("./routes/user"));
 const product_1 = __importDefault(require("./routes/product"));
+const order_1 = __importDefault(require("./routes/order"));
 const app = (0, express_1.default)();
 const address = '0.0.0.0:3000';
 app.use(body_parser_1.default.json());
 app.use('/users', user_1.default);
 app.use('/products', product_1.default);
+app.use('/orders', order_1.default);
 app.get('/', function (req, res) {
     res.send('Hello World!');
 });

@@ -20,11 +20,9 @@ export class User {
 
         const result = await conn.query(sql);
         
-        if(result.rows.length) {    
-            const users = result.rows;
-            return users;
-        }
-        return null;
+
+        const users = result.rows;
+        return users;
     }
 
     async show(id:number) : Promise<user|null> {
@@ -41,19 +39,25 @@ export class User {
         return null;
     }
 
-    async createUser(username: string, password: string, firstname:string,lastname:string) : Promise<user|null> {
+    async createUser(username: string, password: string, firstname:string,lastname:string) : Promise<user> {
         const password_digest = bcrypt.hashSync(password+pepper,Number(saltRounds));
         
         const conn = await Client.connect();
-        const sql = 'INSERT INTO USERS(username,password,firstname,lastname) VALUES($1,$2,$3,$4)';
+        const sql = 'INSERT INTO USERS(username,password,firstname,lastname) VALUES($1,$2,$3,$4) RETURNING *';
 
         const result = await conn.query(sql,[username,password_digest,firstname,lastname]);
-
-        if(result.rows.length) {
-            const user = result.rows[0];
-            return user;
-        }
-        return null;
+        
+        return result.rows[0];
     }
+
+    async deleteUsers() {
+        const conn = await Client.connect();
+        const sql = 'DELETE FROM users';
+
+        await conn.query(sql);
+
+        conn.release();
+        return "deleted successfully";
+    }   
 
 }
