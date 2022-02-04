@@ -12,6 +12,17 @@ port number :5432
 ```bash
 db-migrate up
 ```
+## env variables
+POSTGRES_DB=store
+POSTGRES_TEST_DB=teststore
+POSTGRES_HOST=127.0.0.1
+POSTGRES_USER=ahmed
+POSTGRES_PASSWORD=ahmed
+ENV=dev
+BCRYPT_PASSWORD=this is a pepper of  the hashing
+SALT_ROUNDS=10
+TOKEN_SECRET=ahmedahmed123
+
 
 ### start the server
 ip of server : 0.0.0.0
