@@ -37,7 +37,6 @@ export const getOrderdetails = async (req: Request, res: Response) => {
 export const createOrder = async (req: Request, res: Response) => {
     const userId = Number(req.params.id);
     const status = req.body.status;
-    // const quantity = req.body.quantity;
     try {
         await order.createOrder(userId, status);
         res.status(200).json("successfully created order");

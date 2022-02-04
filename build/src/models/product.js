@@ -9,20 +9,32 @@ class Product {
     async index() {
         const conn = await database_1.default.connect();
         const sql = 'SELECT * FROM products';
-        const result = await conn.query(sql);
-        if (result.rows.length >= 0) {
-            const products = result.rows;
-            return products;
+        try {
+            const result = await conn.query(sql);
+            conn.release();
+            if (result.rows.length >= 0) {
+                const products = result.rows;
+                return products;
+            }
+        }
+        catch (err) {
+            throw new Error('getting products failed');
         }
         return null;
     }
     async show(id) {
         const conn = await database_1.default.connect();
-        const sql = 'SELECT * FROM products where id = $1';
-        const result = await conn.query(sql, [id]);
-        if (result.rows.length) {
-            const product = result.rows[0];
-            return product;
+        const sql = 'SELECT * FROM PRODUCTS where id = $1';
+        try {
+            const result = await conn.query(sql, [id]);
+            conn.release();
+            if (result.rows.length) {
+                const product = result.rows[0];
+                return product;
+            }
+        }
+        catch (err) {
+            throw new Error('getting product failed');
         }
         return null;
     }
@@ -31,6 +43,7 @@ class Product {
         const sql = 'INSERT INTO products (name, price, category) VALUES($1,$2,$3)';
         try {
             await conn.query(sql, [name, price, category]);
+            conn.release();
             return "success";
         }
         catch (err) {
@@ -40,7 +53,12 @@ class Product {
     async deleteProducts() {
         const conn = await database_1.default.connect();
         const sql = 'DELETE FROM products';
-        await conn.query(sql);
+        try {
+            await conn.query(sql);
+        }
+        catch (err) {
+            throw new Error("Deleting products failed");
+        }
         return "DELETED SUCCESSFULLY";
     }
 }

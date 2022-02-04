@@ -17,9 +17,9 @@ describe('Test users endpoints', () => {
         const response = await request.get(url);
         expect(response.statusCode).toBe(401);
     });
-    // it('test create user endpoint it should throw a bad request error with status 400', async() => {
-    //     const url = '/users';
-    //     const response = await request.post(url);
-    //     expect(response.statusCode).toBe(400);
-    // });
+    it('test create user endpoint it should throw a bad request error with status 400', async () => {
+        const url = '/users';
+        const response = await request.post(url);
+        expect(response.statusCode).toBe(400);
+    });
 });

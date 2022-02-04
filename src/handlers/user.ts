@@ -28,6 +28,7 @@ export const getUser = async (req: Request, res: Response) => {
 }
 
 export const createUser = async (req: Request, res: Response) => {
+    
     const username = req.body.username;
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;

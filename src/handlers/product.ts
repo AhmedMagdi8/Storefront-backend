@@ -21,7 +21,7 @@ export const getProduct = async (req: Request, res: Response) => {
         const id = Number(req.params.id);
         const product_ = await product.show(id);
         if(!product_) {
-            throw new Error('not found');
+            throw new Error('Not found');
         }
         res.json(product_);
     } catch (err) {

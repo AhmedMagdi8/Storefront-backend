@@ -20,7 +20,7 @@ const getProduct = async (req, res) => {
         const id = Number(req.params.id);
         const product_ = await product.show(id);
         if (!product_) {
-            throw new Error('not found');
+            throw new Error('Not found');
         }
         res.json(product_);
     }
