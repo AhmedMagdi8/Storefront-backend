@@ -35,13 +35,12 @@ export const createUser = async (req: Request, res: Response) => {
 
     try {
         const  user_ = await user.createUser(username,password,firstname,lastname);
+        if(!user) {
+            throw new Error('bad request');
+        }
         const token = jwt.sign({ user: user_ }, String(process.env.TOKEN_SECRET));
         res.json(token);
-    } catch (err) {
-        console.log(err);
-        
-        res.status(500).json({
-            "err": "SERVER ERROR"
-        })
+    } catch (err) {        
+        res.status(400).json("bad request")
     }
 }

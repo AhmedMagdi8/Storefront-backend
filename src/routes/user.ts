@@ -9,7 +9,7 @@ const router: Router = Router();
 
 router.get('/', isAuth, getAllUsers);
 router.get('/:id', isAuth, getUser);
-router.post('/', isAuth, createUser);  
+router.post('/', createUser);  
 
 
 export default router;

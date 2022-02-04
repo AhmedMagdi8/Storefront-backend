@@ -39,15 +39,18 @@ export class User {
         return null;
     }
 
-    async createUser(username: string, password: string, firstname:string,lastname:string) : Promise<user> {
+    async createUser(username: string, password: string, firstname:string,lastname:string) : Promise<user|null> {
         const password_digest = bcrypt.hashSync(password+pepper,Number(saltRounds));
         
         const conn = await Client.connect();
         const sql = 'INSERT INTO USERS(username,password,firstname,lastname) VALUES($1,$2,$3,$4) RETURNING *';
 
         const result = await conn.query(sql,[username,password_digest,firstname,lastname]);
-        
-        return result.rows[0];
+        if(result.rows.length) {
+            const user = result.rows[0];
+            return user;
+        }
+        return null;
     }
 
     async deleteUsers() {

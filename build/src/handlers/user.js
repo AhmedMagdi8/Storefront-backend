@@ -37,14 +37,14 @@ const createUser = async (req, res) => {
     const password = req.body.password;
     try {
         const user_ = await user.createUser(username, password, firstname, lastname);
+        if (!user) {
+            throw new Error('bad request');
+        }
         const token = jsonwebtoken_1.default.sign({ user: user_ }, String(process.env.TOKEN_SECRET));
         res.json(token);
     }
     catch (err) {
-        console.log(err);
-        res.status(500).json({
-            "err": "SERVER ERROR"
-        });
+        res.status(400).json("bad request");
     }
 };
 exports.createUser = createUser;

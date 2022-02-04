@@ -19,12 +19,13 @@ const getProduct = async (req, res) => {
     try {
         const id = Number(req.params.id);
         const product_ = await product.show(id);
+        if (!product_) {
+            throw new Error('not found');
+        }
         res.json(product_);
     }
     catch (err) {
-        res.status(404).json({
-            "err": "NOT FOUND!!"
-        });
+        res.status(404).json("not found");
     }
 };
 exports.getProduct = getProduct;
@@ -34,7 +35,7 @@ const createProduct = async (req, res) => {
     const category = req.body.category;
     try {
         await product.createProduct(name, price, category);
-        res.json("success");
+        res.json("Product Added Successfully");
     }
     catch (err) {
         console.log(err);

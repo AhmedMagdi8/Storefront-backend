@@ -9,5 +9,5 @@ const user_1 = require("../handlers/user");
 const router = (0, express_1.Router)();
 router.get('/', auth_middleware_1.default, user_1.getAllUsers);
 router.get('/:id', auth_middleware_1.default, user_1.getUser);
-router.post('/', auth_middleware_1.default, user_1.createUser);
+router.post('/', user_1.createUser);
 exports.default = router;

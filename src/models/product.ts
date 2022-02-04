@@ -28,7 +28,7 @@ export class Product {
         const sql = 'SELECT * FROM products where id = $1';
 
         const result = await conn.query(sql,[id]);
-
+                
         if(result.rows.length) {
             const product = result.rows[0];
             return product;
