@@ -32,11 +32,11 @@ class User {
                 const user = result.rows[0];
                 return user;
             }
+            return null;
         }
         catch (err) {
             throw new Error('getting user failed');
         }
-        return null;
     }
     async createUser(username, password, firstname, lastname) {
         const password_digest = bcrypt_1.default.hashSync(password + pepper, Number(saltRounds));

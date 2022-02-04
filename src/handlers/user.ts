@@ -19,11 +19,24 @@ export const getUser = async (req: Request, res: Response) => {
     try {
         const id = Number(req.params.id);
         const user_ = await user.show(id);
-        res.json(user_);
+        
+        if(user_ === null) {
+            throw new Error('User not found');
+        } else {            
+            res.json(user_);
+        }
     } catch (err) {
-        res.status(404).json({
-            "err": "NOT FOUND!!"
-        })
+        res.status(404).json("user not found!");
+    }
+}
+
+
+export const deleteUsers = async (req: Request, res: Response) => {
+    try {
+        await user.deleteUsers();
+        res.json("deleted all users");
+    } catch (err) {
+        res.status(500).json("deleteing users failed")
     }
 }
 

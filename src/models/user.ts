@@ -41,10 +41,10 @@ export class User {
                 const user = result.rows[0];
                 return user;
             }
+            return null;
         } catch (err) {
             throw new Error('getting user failed')
         }
-        return null;
     }
 
     async createUser(username: string, password: string, firstname:string,lastname:string) : Promise<user|null> {
